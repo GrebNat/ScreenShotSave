@@ -28,8 +28,7 @@ namespace SS
             UpdateSettingLabel();
 
             Application.ApplicationExit += new EventHandler(this.OnApplicationExit);
-            this.t = new Thread(() => button1_Click());
-            this.t.Start();
+           
         }
 
         private void Form1_Resize(object sender, EventArgs e)
@@ -87,19 +86,32 @@ namespace SS
                                                 Properties.Settings.Default.savePeriodical);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnStart_Click(object sender, EventArgs e)
         {
-            ScreenSaver ss = new ScreenSaver();
-            ss.StartProcess();
+            switch (btnStart.Text)
+            {
+                case "Start":
+                    this.t = new Thread(() => TStart());
+                    this.t.Start();
+                    btnStart.Text = "Stop";
+                    break;
+                case "Stop":
+                    this.t.Abort();
+                    btnStart.Text = "Start";
+                    break;
+            }
         }
-        private void button1_Click()
+        private void TStart()
         {
             ScreenSaver ss = new ScreenSaver();
             ss.StartProcess();
         }
         private void OnApplicationExit(object sender, EventArgs e)
         {
-            this.t.Abort();      
+            if (t.IsAlive)
+            {
+                this.t.Abort();
+            }
         }
     }
 }
