@@ -1,0 +1,9 @@
+D:\С#AutomationClasses\ScreenSaver\SS\SS\bin\Debug\SS.exe.config
+D:\С#AutomationClasses\ScreenSaver\SS\SS\bin\Debug\SS.exe
+D:\С#AutomationClasses\ScreenSaver\SS\SS\bin\Debug\SS.pdb
+D:\С#AutomationClasses\ScreenSaver\SS\SS\obj\Debug\SS.csprojResolveAssemblyReference.cache
+D:\С#AutomationClasses\ScreenSaver\SS\SS\obj\Debug\SS.Properties.Resources.resources
+D:\С#AutomationClasses\ScreenSaver\SS\SS\obj\Debug\SS.csproj.GenerateResource.Cache
+D:\С#AutomationClasses\ScreenSaver\SS\SS\obj\Debug\SS.exe
+D:\С#AutomationClasses\ScreenSaver\SS\SS\obj\Debug\SS.pdb
+D:\С#AutomationClasses\ScreenSaver\SS\SS\obj\Debug\SS.MainForm.resources
