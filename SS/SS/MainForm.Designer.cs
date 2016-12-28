@@ -39,12 +39,21 @@
             this.label3 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.label4 = new System.Windows.Forms.Label();
             this.btnStart = new System.Windows.Forms.Button();
             this.lblSettings = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.gbTime = new System.Windows.Forms.GroupBox();
+            this.dpStartDate = new System.Windows.Forms.DateTimePicker();
+            this.dpEndDate = new System.Windows.Forms.DateTimePicker();
+            this.gbWeek = new System.Windows.Forms.GroupBox();
+            this.cbSunday = new System.Windows.Forms.CheckBox();
+            this.cbSaturday = new System.Windows.Forms.CheckBox();
+            this.cbFriday = new System.Windows.Forms.CheckBox();
+            this.cbThursday = new System.Windows.Forms.CheckBox();
+            this.cbWednesday = new System.Windows.Forms.CheckBox();
+            this.chThuesday = new System.Windows.Forms.CheckBox();
+            this.cbMonday = new System.Windows.Forms.CheckBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.nudSavePeriodicaly)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -54,7 +63,8 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.gbTime.SuspendLayout();
+            this.gbWeek.SuspendLayout();
             this.SuspendLayout();
             // 
             // notifyIcon1
@@ -129,7 +139,8 @@
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.groupBox1);
+            this.splitContainer1.Panel2.Controls.Add(this.gbTime);
+            this.splitContainer1.Panel2.Controls.Add(this.gbWeek);
             this.splitContainer1.Size = new System.Drawing.Size(760, 397);
             this.splitContainer1.SplitterDistance = 426;
             this.splitContainer1.TabIndex = 5;
@@ -152,11 +163,21 @@
             // 
             // splitContainer2.Panel2
             // 
+            this.splitContainer2.Panel2.Controls.Add(this.label4);
             this.splitContainer2.Panel2.Controls.Add(this.btnStart);
             this.splitContainer2.Panel2.Controls.Add(this.lblSettings);
             this.splitContainer2.Size = new System.Drawing.Size(426, 397);
             this.splitContainer2.SplitterDistance = 198;
             this.splitContainer2.TabIndex = 5;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(56, 151);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(35, 13);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "label4";
             // 
             // btnStart
             // 
@@ -164,7 +185,7 @@
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(75, 23);
             this.btnStart.TabIndex = 1;
-            this.btnStart.Text = "Start";
+            this.btnStart.Text = "Stop";
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
@@ -177,50 +198,136 @@
             this.lblSettings.TabIndex = 0;
             this.lblSettings.Text = "label4";
             // 
-            // groupBox1
+            // gbTime
             // 
-            this.groupBox1.Controls.Add(this.radioButton3);
-            this.groupBox1.Controls.Add(this.radioButton2);
-            this.groupBox1.Controls.Add(this.radioButton1);
-            this.groupBox1.Location = new System.Drawing.Point(32, 43);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(197, 114);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "day to run";
+            this.gbTime.Controls.Add(this.dpStartDate);
+            this.gbTime.Controls.Add(this.dpEndDate);
+            this.gbTime.Location = new System.Drawing.Point(15, 222);
+            this.gbTime.Name = "gbTime";
+            this.gbTime.Size = new System.Drawing.Size(292, 110);
+            this.gbTime.TabIndex = 3;
+            this.gbTime.TabStop = false;
+            this.gbTime.Text = "Select time range to save screenshorts";
             // 
-            // radioButton3
+            // dpStartDate
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(7, 82);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(71, 17);
-            this.radioButton3.TabIndex = 2;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "every day";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.dpStartDate.CustomFormat = "HH:mm";
+            this.dpStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dpStartDate.Location = new System.Drawing.Point(7, 40);
+            this.dpStartDate.Name = "dpStartDate";
+            this.dpStartDate.ShowUpDown = true;
+            this.dpStartDate.Size = new System.Drawing.Size(58, 20);
+            this.dpStartDate.TabIndex = 1;
+            this.dpStartDate.Value = new System.DateTime(2016, 12, 28, 9, 30, 0, 0);
+            this.dpStartDate.ValueChanged += new System.EventHandler(this.dpStartDate_ValueChanged);
             // 
-            // radioButton2
+            // dpEndDate
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(7, 50);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(58, 17);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "holiday";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.dpEndDate.CustomFormat = "HH:mm";
+            this.dpEndDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dpEndDate.Location = new System.Drawing.Point(95, 40);
+            this.dpEndDate.Name = "dpEndDate";
+            this.dpEndDate.ShowUpDown = true;
+            this.dpEndDate.Size = new System.Drawing.Size(52, 20);
+            this.dpEndDate.TabIndex = 2;
+            this.dpEndDate.Value = new System.DateTime(2016, 12, 28, 18, 30, 0, 0);
+            this.dpEndDate.ValueChanged += new System.EventHandler(this.dpEndDate_ValueChanged);
             // 
-            // radioButton1
+            // gbWeek
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(7, 20);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(82, 17);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "working day";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.gbWeek.Controls.Add(this.cbSunday);
+            this.gbWeek.Controls.Add(this.cbSaturday);
+            this.gbWeek.Controls.Add(this.cbFriday);
+            this.gbWeek.Controls.Add(this.cbThursday);
+            this.gbWeek.Controls.Add(this.cbWednesday);
+            this.gbWeek.Controls.Add(this.chThuesday);
+            this.gbWeek.Controls.Add(this.cbMonday);
+            this.gbWeek.Location = new System.Drawing.Point(15, 29);
+            this.gbWeek.Name = "gbWeek";
+            this.gbWeek.Size = new System.Drawing.Size(292, 162);
+            this.gbWeek.TabIndex = 0;
+            this.gbWeek.TabStop = false;
+            this.gbWeek.Text = "Select dates to save screenshorts";
+            // 
+            // cbSunday
+            // 
+            this.cbSunday.AutoSize = true;
+            this.cbSunday.Location = new System.Drawing.Point(138, 57);
+            this.cbSunday.Name = "cbSunday";
+            this.cbSunday.Size = new System.Drawing.Size(62, 17);
+            this.cbSunday.TabIndex = 6;
+            this.cbSunday.Text = "Sanday";
+            this.cbSunday.UseVisualStyleBackColor = true;
+            // 
+            // cbSaturday
+            // 
+            this.cbSaturday.AutoSize = true;
+            this.cbSaturday.Location = new System.Drawing.Point(138, 29);
+            this.cbSaturday.Name = "cbSaturday";
+            this.cbSaturday.Size = new System.Drawing.Size(68, 17);
+            this.cbSaturday.TabIndex = 5;
+            this.cbSaturday.Text = "Saturday";
+            this.cbSaturday.UseVisualStyleBackColor = true;
+            // 
+            // cbFriday
+            // 
+            this.cbFriday.AutoSize = true;
+            this.cbFriday.Checked = true;
+            this.cbFriday.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbFriday.Location = new System.Drawing.Point(7, 132);
+            this.cbFriday.Name = "cbFriday";
+            this.cbFriday.Size = new System.Drawing.Size(54, 17);
+            this.cbFriday.TabIndex = 4;
+            this.cbFriday.Text = "Friday";
+            this.cbFriday.UseVisualStyleBackColor = true;
+            // 
+            // cbThursday
+            // 
+            this.cbThursday.AutoSize = true;
+            this.cbThursday.Checked = true;
+            this.cbThursday.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbThursday.Location = new System.Drawing.Point(7, 104);
+            this.cbThursday.Name = "cbThursday";
+            this.cbThursday.Size = new System.Drawing.Size(70, 17);
+            this.cbThursday.TabIndex = 3;
+            this.cbThursday.Text = "Thursday";
+            this.cbThursday.UseVisualStyleBackColor = true;
+            // 
+            // cbWednesday
+            // 
+            this.cbWednesday.AutoSize = true;
+            this.cbWednesday.Checked = true;
+            this.cbWednesday.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbWednesday.Location = new System.Drawing.Point(7, 81);
+            this.cbWednesday.Name = "cbWednesday";
+            this.cbWednesday.Size = new System.Drawing.Size(83, 17);
+            this.cbWednesday.TabIndex = 2;
+            this.cbWednesday.Text = "Wednesday";
+            this.cbWednesday.UseVisualStyleBackColor = true;
+            // 
+            // chThuesday
+            // 
+            this.chThuesday.AutoSize = true;
+            this.chThuesday.Checked = true;
+            this.chThuesday.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chThuesday.Location = new System.Drawing.Point(7, 57);
+            this.chThuesday.Name = "chThuesday";
+            this.chThuesday.Size = new System.Drawing.Size(73, 17);
+            this.chThuesday.TabIndex = 1;
+            this.chThuesday.Text = "Thuesday";
+            this.chThuesday.UseVisualStyleBackColor = true;
+            // 
+            // cbMonday
+            // 
+            this.cbMonday.AutoSize = true;
+            this.cbMonday.Checked = true;
+            this.cbMonday.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbMonday.Location = new System.Drawing.Point(7, 29);
+            this.cbMonday.Name = "cbMonday";
+            this.cbMonday.Size = new System.Drawing.Size(64, 17);
+            this.cbMonday.TabIndex = 0;
+            this.cbMonday.Text = "Monday";
+            this.cbMonday.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -242,8 +349,9 @@
             this.splitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.gbTime.ResumeLayout(false);
+            this.gbWeek.ResumeLayout(false);
+            this.gbWeek.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -258,13 +366,22 @@
         private System.Windows.Forms.NumericUpDown nudSavePeriodicaly;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.Label lblSettings;
         private System.Windows.Forms.Button btnStart;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.DateTimePicker dpEndDate;
+        private System.Windows.Forms.DateTimePicker dpStartDate;
+        private System.Windows.Forms.GroupBox gbWeek;
+        private System.Windows.Forms.CheckBox cbSunday;
+        private System.Windows.Forms.CheckBox cbSaturday;
+        private System.Windows.Forms.CheckBox cbFriday;
+        private System.Windows.Forms.CheckBox cbThursday;
+        private System.Windows.Forms.CheckBox cbWednesday;
+        private System.Windows.Forms.CheckBox chThuesday;
+        private System.Windows.Forms.CheckBox cbMonday;
+        private System.Windows.Forms.GroupBox gbTime;
+        private System.Windows.Forms.Label label4;
     }
 }
 

@@ -24,19 +24,23 @@ namespace SS
         }
         public Bitmap TakeScreenShot()
         {
-            Bitmap bmp = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, PixelFormat.Format32bppRgb);
-            Graphics gr = Graphics.FromImage(bmp);
-
-            gr.CopyFromScreen(Screen.PrimaryScreen.Bounds.X, Screen.PrimaryScreen.Bounds.Y, 0, 0, Screen.PrimaryScreen.Bounds.Size, CopyPixelOperation.SourceCopy);
+            int screenLeft = SystemInformation.VirtualScreen.Left,
+                screenTop = SystemInformation.VirtualScreen.Top,
+                screenWidth = SystemInformation.VirtualScreen.Width,
+                screenHeight = SystemInformation.VirtualScreen.Height;
+            
+            Bitmap bmp = new Bitmap(screenWidth, screenHeight);
+            Graphics.FromImage(bmp).CopyFromScreen(screenLeft, screenTop, 0, 0, bmp.Size);
 
             return bmp;
+            
         }
 
         public bool SavePicture()
         {
            
             string dirName = Properties.Settings.Default.destinationPath + "/" + generateFolderName();
-            string fileName = dirName + "/" + generatePictureName();
+            string fileName = String.Format("{0}/{1}.{2}", dirName, generatePictureName(), ImageFormat.Jpeg);
             FileStream file = null;
 
             Bitmap btm = TakeScreenShot();

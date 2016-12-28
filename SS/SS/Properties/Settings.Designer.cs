@@ -46,5 +46,113 @@ namespace SS.Properties {
                 this["destinationPath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Monday {
+            get {
+                return ((bool)(this["Monday"]));
+            }
+            set {
+                this["Monday"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Tuesday {
+            get {
+                return ((bool)(this["Tuesday"]));
+            }
+            set {
+                this["Tuesday"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Wednesday {
+            get {
+                return ((bool)(this["Wednesday"]));
+            }
+            set {
+                this["Wednesday"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Thursday {
+            get {
+                return ((bool)(this["Thursday"]));
+            }
+            set {
+                this["Thursday"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Friday {
+            get {
+                return ((bool)(this["Friday"]));
+            }
+            set {
+                this["Friday"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Saturday {
+            get {
+                return ((bool)(this["Saturday"]));
+            }
+            set {
+                this["Saturday"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Sunday {
+            get {
+                return ((bool)(this["Sunday"]));
+            }
+            set {
+                this["Sunday"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("16:30:00")]
+        public global::System.TimeSpan startTime {
+            get {
+                return ((global::System.TimeSpan)(this["startTime"]));
+            }
+            set {
+                this["startTime"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("18:30:00")]
+        public global::System.TimeSpan endTime {
+            get {
+                return ((global::System.TimeSpan)(this["endTime"]));
+            }
+            set {
+                this["endTime"] = value;
+            }
+        }
     }
 }
