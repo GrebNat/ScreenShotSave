@@ -82,12 +82,12 @@
             this.trayContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.closeToolStripMenuItem});
             this.trayContextMenu.Name = "trayContextMenu";
-            this.trayContextMenu.Size = new System.Drawing.Size(153, 48);
+            this.trayContextMenu.Size = new System.Drawing.Size(104, 26);
             // 
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.closeToolStripMenuItem.Text = "Close";
             // 
             // tfDestinationFolder
@@ -99,6 +99,7 @@
             this.tfDestinationFolder.Text = "c:/ss_default";
             this.tfDestinationFolder.Click += new System.EventHandler(this.TFDestinationFolder_Click);
             this.tfDestinationFolder.TextChanged += new System.EventHandler(this.tfDestinationFolder_TextChanged);
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // label2
             // 

@@ -22,32 +22,50 @@ namespace SS
         public MainForm()
         {
             InitializeComponent();
+
+            //tray icon event
             notifyIcon1.Visible = false;
             this.notifyIcon1.MouseClick += new MouseEventHandler(notifyIcon1_MouseClick);
 
-            // добавляем событие на изменение окна
+            //Application event
+            Application.ApplicationExit += new EventHandler(this.OnApplicationExit);
+
+            //context menu event
+            closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
+
+            // timer event
+            timer.Interval = 1000;
+            timer.Start();
+            timer.Tick += new EventHandler(SystemEvents_TimeChanged);
+
+            //form event
             this.Resize += new System.EventHandler(this.Form1_Resize);
 
             UpdateProperties();
             UpdateSettingLabel();
             this.ssThread = new Thread(() => TStart());
             this.ssThread.Start();
-
-            Application.ApplicationExit += new EventHandler(this.OnApplicationExit);
-            timer.Interval = 1000;
-            timer.Tick += new EventHandler(SystemEvents_TimeChanged);
-            timer.Start();
-
-            //context menu 
-            closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
-
-
         }
+
+
+         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+         {
+
+            try
+            {
+                string filePath = tfDestinationFolder.Text.Replace("/", "\\");
+                Process.Start("explorer.exe", filePath);
+            }
+            catch { }
+         }
 
         public void SystemEvents_TimeChanged(object sender, EventArgs e)
         {
             TimeSpan currentTime = DateTime.Now.TimeOfDay;
-            if (currentTime >= Properties.Settings.Default.startTime && currentTime <=Properties.Settings.Default.endTime)
+            
+            if (currentTime >= Properties.Settings.Default.startTime
+                && currentTime <= Properties.Settings.Default.endTime
+                && CorrectDayOfWeek())
             {
                 label4.Text = "Tread state "+ssThread.ThreadState;
                 if (ssThread.ThreadState.Equals(System.Threading.ThreadState.Suspended))
@@ -59,7 +77,7 @@ namespace SS
                     }
                     catch
                     {
-                        label4.Text = ssThread.IsAlive+" \n something happend, please restart";
+                        label4.Text = ssThread.IsAlive+" \n something happend, please restart application";
                     }
                 }
             }
@@ -135,7 +153,15 @@ namespace SS
             Properties.Settings.Default.Sunday = (cbSunday.CheckState == CheckState.Checked) ? true : false;
         }
      
-
+        public bool CorrectDayOfWeek()
+        {
+            string dateOfWeek = DateTime.Now.DayOfWeek.ToString();
+            if (Properties.Settings.Default.Monday && dateOfWeek.Equals("Monday"))
+                return true;
+            if (Properties.Settings.Default.Friday && dateOfWeek.Equals("Friday"))
+                return true;
+            return false;
+        }
         private void nudSavePeriodicaly_ValueChanged(object sender, EventArgs e)
         {
             UpdateProperties();
@@ -201,10 +227,8 @@ namespace SS
 
         private void closeToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
-            this.ssThread.Abort();
             Application.Exit();
         }
-
-
+        
     }
 }
