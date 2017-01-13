@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
@@ -17,20 +18,21 @@ namespace SS
     {
         System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
 
-        Thread t;
+        Thread ssThread;
+        Process explorerProcess;
         public MainForm()
         {
             InitializeComponent();
             notifyIcon1.Visible = false;
-            this.notifyIcon1.MouseClick += new MouseEventHandler(notifyIcon1_MouseDoubleClick);
+            this.notifyIcon1.MouseClick += new MouseEventHandler(notifyIcon1_MouseClick);
 
             // добавляем событие на изменение окна
             this.Resize += new System.EventHandler(this.Form1_Resize);
 
             UpdateProperties();
             UpdateSettingLabel();
-            this.t = new Thread(() => TStart());
-            this.t.Start();
+            this.ssThread = new Thread(() => TStart());
+            this.ssThread.Start();
 
             Application.ApplicationExit += new EventHandler(this.OnApplicationExit);
             timer.Interval = 1000;
@@ -44,26 +46,26 @@ namespace SS
             TimeSpan currentTime = DateTime.Now.TimeOfDay;
             if (currentTime >= Properties.Settings.Default.startTime && currentTime <=Properties.Settings.Default.endTime)
             {
-                label4.Text = "Tread state "+t.ThreadState;
-                if (t.ThreadState.Equals(ThreadState.Suspended))
+                label4.Text = "Tread state "+ssThread.ThreadState;
+                if (ssThread.ThreadState.Equals(System.Threading.ThreadState.Suspended))
                 {
                     try
                     {
-                        t.Resume();
+                        ssThread.Resume();
                         btnStart.Text = "Stop";
                     }
                     catch
                     {
-                        label4.Text = t.IsAlive+" \n something happend, please restart";
+                        label4.Text = ssThread.IsAlive+" \n something happend, please restart";
                     }
                 }
             }
             else
             {
                 label4.Text = String.Format("Time changed: {0}", DateTime.Now);
-                if (!t.ThreadState.Equals(ThreadState.Suspended))
+                if (!ssThread.ThreadState.Equals(System.Threading.ThreadState.Suspended))
                 {
-                    t.Suspend();
+                    ssThread.Suspend();
                     btnStart.Text = "Start";
                 }
             }
@@ -81,12 +83,22 @@ namespace SS
                 notifyIcon1.Visible = true;
             }
         }
-        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void notifyIcon1_MouseClick(object sender, MouseEventArgs e)
         {
-            notifyIcon1.Visible = false;
-            this.ShowInTaskbar = true;
-            WindowState = FormWindowState.Normal;
+            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+            {
+                notifyIcon1.Visible = false;
+                this.ShowInTaskbar = true;
+                WindowState = FormWindowState.Normal;
+            }
+            else if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                trayContextMenu.Show();
+            }
+
+           
         }
+        
         public string ChooseFolder()
         {
             return fdSelector.SelectedPath;
@@ -138,12 +150,12 @@ namespace SS
             switch (btnStart.Text)
             {
                 case "Start":
-                    this.t = new Thread(() => TStart());
-                    this.t.Start();
+                    this.ssThread = new Thread(() => TStart());
+                    this.ssThread.Start();
                     btnStart.Text = "Stop";
                     break;
                 case "Stop":
-                    this.t.Abort();
+                    this.ssThread.Abort();
                     btnStart.Text = "Start";
                     break;
             }
@@ -155,10 +167,17 @@ namespace SS
         }
         private void OnApplicationExit(object sender, EventArgs e)
         {
-            if (t.IsAlive)
+            if (ssThread.ThreadState.HasFlag(System.Threading.ThreadState.SuspendRequested) 
+                || ssThread.ThreadState.HasFlag(System.Threading.ThreadState.Suspended))
             {
-                this.t.Abort();
+                ssThread.Resume();
             }
+            if (ssThread.IsAlive)
+            {
+                this.ssThread.Abort();
+                this.ssThread.Join();
+            }
+            
         }
 
         private void dpStartDate_ValueChanged(object sender, EventArgs e)
@@ -169,6 +188,23 @@ namespace SS
         private void dpEndDate_ValueChanged(object sender, EventArgs e)
         {
             UpdateProperties();
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+   
+            try
+            {
+                string filePath = tfDestinationFolder.Text.Replace("/", "\\");
+                explorerProcess = Process.Start("explorer.exe", filePath);
+            }
+            catch (Exception ex) { }
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            WindowState = FormWindowState.Minimized;
+            e.Cancel = true;
         }
     }
 }

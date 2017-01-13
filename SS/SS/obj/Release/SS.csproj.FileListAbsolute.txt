@@ -1,8 +1,0 @@
-D:\С#AutomationClasses\ScreenSaver\SS\SS\bin\Release\SS.exe.config
-D:\С#AutomationClasses\ScreenSaver\SS\SS\bin\Release\SS.exe
-D:\С#AutomationClasses\ScreenSaver\SS\SS\bin\Release\SS.pdb
-D:\С#AutomationClasses\ScreenSaver\SS\SS\obj\Release\SS.MainForm.resources
-D:\С#AutomationClasses\ScreenSaver\SS\SS\obj\Release\SS.Properties.Resources.resources
-D:\С#AutomationClasses\ScreenSaver\SS\SS\obj\Release\SS.csproj.GenerateResource.Cache
-D:\С#AutomationClasses\ScreenSaver\SS\SS\obj\Release\SS.exe
-D:\С#AutomationClasses\ScreenSaver\SS\SS\obj\Release\SS.pdb
