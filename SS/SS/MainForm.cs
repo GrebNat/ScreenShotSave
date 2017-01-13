@@ -19,7 +19,6 @@ namespace SS
         System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
 
         Thread ssThread;
-        Process explorerProcess;
         public MainForm()
         {
             InitializeComponent();
@@ -38,7 +37,11 @@ namespace SS
             timer.Interval = 1000;
             timer.Tick += new EventHandler(SystemEvents_TimeChanged);
             timer.Start();
-        
+
+            //context menu 
+            closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
+
+
         }
 
         public void SystemEvents_TimeChanged(object sender, EventArgs e)
@@ -190,21 +193,18 @@ namespace SS
             UpdateProperties();
         }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-   
-            try
-            {
-                string filePath = tfDestinationFolder.Text.Replace("/", "\\");
-                explorerProcess = Process.Start("explorer.exe", filePath);
-            }
-            catch (Exception ex) { }
-        }
-
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             WindowState = FormWindowState.Minimized;
             e.Cancel = true;
         }
+
+        private void closeToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            this.ssThread.Abort();
+            Application.Exit();
+        }
+
+
     }
 }
