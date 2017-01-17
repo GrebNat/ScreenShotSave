@@ -22,24 +22,12 @@ namespace SS
         public MainForm()
         {
             InitializeComponent();
-
-            //tray icon event
-            notifyIcon1.Visible = false;
-            this.notifyIcon1.MouseClick += new MouseEventHandler(notifyIcon1_MouseClick);
-
-            //Application event
             Application.ApplicationExit += new EventHandler(this.OnApplicationExit);
 
-            //context menu event
-            closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
 
-            // timer event
             timer.Interval = 1000;
             timer.Start();
             timer.Tick += new EventHandler(SystemEvents_TimeChanged);
-
-            //form event
-            this.Resize += new System.EventHandler(this.Form1_Resize);
 
             UpdateProperties();
             UpdateSettingLabel();
@@ -145,7 +133,7 @@ namespace SS
             Properties.Settings.Default.endTime = dpEndDate.Value.TimeOfDay;
 
             Properties.Settings.Default.Monday = (cbMonday.CheckState == CheckState.Checked) ? true:false;
-            Properties.Settings.Default.Thursday = (cbThursday.CheckState == CheckState.Checked) ? true : false;
+            Properties.Settings.Default.Tuesday = (cbTuesday.CheckState == CheckState.Checked) ? true : false;
             Properties.Settings.Default.Wednesday = (cbWednesday.CheckState == CheckState.Checked) ? true : false;
             Properties.Settings.Default.Thursday = (cbThursday.CheckState == CheckState.Checked) ? true : false;
             Properties.Settings.Default.Friday = (cbFriday.CheckState == CheckState.Checked) ? true : false;
@@ -158,7 +146,17 @@ namespace SS
             string dateOfWeek = DateTime.Now.DayOfWeek.ToString();
             if (Properties.Settings.Default.Monday && dateOfWeek.Equals("Monday"))
                 return true;
+            if (Properties.Settings.Default.Thursday && dateOfWeek.Equals("Thursday"))
+                return true;
+            if (Properties.Settings.Default.Wednesday && dateOfWeek.Equals("Wednesday"))
+                return true;
+            if (Properties.Settings.Default.Tuesday && dateOfWeek.Equals("Tuesday"))
+                return true;
             if (Properties.Settings.Default.Friday && dateOfWeek.Equals("Friday"))
+                return true;
+            if (Properties.Settings.Default.Saturday && dateOfWeek.Equals("Saturday"))
+                return true;
+            if (Properties.Settings.Default.Sunday && dateOfWeek.Equals("Sunday"))
                 return true;
             return false;
         }
@@ -169,8 +167,8 @@ namespace SS
         }
         private void UpdateSettingLabel()
         {
-            lblSettings.Text = String.Format("SS Program will story result under \n {0} \n every {1} minutes", 
-                                                Properties.Settings.Default.destinationPath, 
+            this.Text = String.Format("SAVE SCREEN PICTURE will store result every {1} minutes under \n {0} \n ",
+                                                Properties.Settings.Default.destinationPath,
                                                 Properties.Settings.Default.savePeriodical);
         }
 
@@ -196,6 +194,7 @@ namespace SS
         }
         private void OnApplicationExit(object sender, EventArgs e)
         {
+            
             if (ssThread.ThreadState.HasFlag(System.Threading.ThreadState.SuspendRequested) 
                 || ssThread.ThreadState.HasFlag(System.Threading.ThreadState.Suspended))
             {
@@ -229,6 +228,10 @@ namespace SS
         {
             Application.Exit();
         }
-        
+
+        private void cbWeekDay_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateProperties();
+        }
     }
 }
