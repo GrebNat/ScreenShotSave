@@ -22,10 +22,8 @@ namespace SS.Properties {
                 return defaultInstance;
             }
         }
-        
         [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
         public int savePeriodical {
             get {
                 return ((int)(this["savePeriodical"]));
@@ -37,7 +35,7 @@ namespace SS.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("c:\\ss_def")]
         public string destinationPath {
             get {
                 return ((string)(this["destinationPath"]));
@@ -50,6 +48,7 @@ namespace SS.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
         public bool Monday {
             get {
                 return ((bool)(this["Monday"]));
@@ -62,6 +61,7 @@ namespace SS.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
         public bool Tuesday {
             get {
                 return ((bool)(this["Tuesday"]));
@@ -133,7 +133,7 @@ namespace SS.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("16:30:00")]
+        [global::System.Configuration.DefaultSettingValueAttribute("09:30:00")]
         public global::System.TimeSpan startTime {
             get {
                 return ((global::System.TimeSpan)(this["startTime"]));

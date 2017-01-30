@@ -16,12 +16,8 @@ namespace SS
     class ScreenSaver
     {
 
-        public void StartProcess() {
-            while (SavePicture())
-            {
-                Thread.Sleep(TimeSpan.FromMinutes(Properties.Settings.Default.savePeriodical));
-            }
-        }
+        public string LastSavedFileName { get; set; }
+
         public Bitmap TakeScreenShot()
         {
             int screenLeft = SystemInformation.VirtualScreen.Left,
@@ -51,13 +47,15 @@ namespace SS
             }
      
             try
-            { 
+            {
+                this.LastSavedFileName = fileName;
                 file = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
                 btm.Save(file, ImageFormat.Jpeg);
                 return true;
             }
             catch
             {
+                this.LastSavedFileName = null;
                 return false;
             }
             finally

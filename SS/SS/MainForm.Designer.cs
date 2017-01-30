@@ -46,15 +46,17 @@
             this.cbTuesday = new System.Windows.Forms.CheckBox();
             this.cbMonday = new System.Windows.Forms.CheckBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.btnStart = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.nudSavePeriodicaly = new System.Windows.Forms.NumericUpDown();
             this.tfDestinationFolder = new System.Windows.Forms.TextBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.pbSavedPicture = new System.Windows.Forms.PictureBox();
+            this.pbStatus = new System.Windows.Forms.PictureBox();
+            this.lblStatus = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.trayContextMenu.SuspendLayout();
@@ -63,19 +65,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudSavePeriodicaly)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSavedPicture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbStatus)).BeginInit();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.SuspendLayout();
-            this.Resize += new System.EventHandler(this.Form1_Resize);
             // 
             // notifyIcon1
             // 
             this.notifyIcon1.ContextMenuStrip = this.trayContextMenu;
             this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
             this.notifyIcon1.Text = "Откорой SS";
-            this.notifyIcon1.Visible = true;
-            notifyIcon1.Visible = false;
-            this.notifyIcon1.MouseClick += new System.Windows.Forms.MouseEventHandler(notifyIcon1_MouseClick);
+            this.notifyIcon1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseClick);
             // 
             // trayContextMenu
             // 
@@ -156,6 +157,7 @@
             this.cbSunday.TabIndex = 6;
             this.cbSunday.Text = "Sanday";
             this.cbSunday.UseVisualStyleBackColor = true;
+            this.cbSunday.CheckedChanged += new System.EventHandler(this.cbWeekDay_CheckedChanged);
             // 
             // cbSaturday
             // 
@@ -167,12 +169,11 @@
             this.cbSaturday.TabIndex = 5;
             this.cbSaturday.Text = "Saturday";
             this.cbSaturday.UseVisualStyleBackColor = true;
+            this.cbSaturday.CheckedChanged += new System.EventHandler(this.cbWeekDay_CheckedChanged);
             // 
             // cbFriday
             // 
             this.cbFriday.AutoSize = true;
-            this.cbFriday.Checked = true;
-            this.cbFriday.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbFriday.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cbFriday.Location = new System.Drawing.Point(7, 132);
             this.cbFriday.Name = "cbFriday";
@@ -180,12 +181,11 @@
             this.cbFriday.TabIndex = 4;
             this.cbFriday.Text = "Friday";
             this.cbFriday.UseVisualStyleBackColor = true;
+            this.cbFriday.CheckedChanged += new System.EventHandler(this.cbWeekDay_CheckedChanged);
             // 
             // cbThursday
             // 
             this.cbThursday.AutoSize = true;
-            this.cbThursday.Checked = true;
-            this.cbThursday.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbThursday.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cbThursday.Location = new System.Drawing.Point(7, 104);
             this.cbThursday.Name = "cbThursday";
@@ -193,12 +193,11 @@
             this.cbThursday.TabIndex = 3;
             this.cbThursday.Text = "Thursday";
             this.cbThursday.UseVisualStyleBackColor = true;
+            this.cbThursday.CheckedChanged += new System.EventHandler(this.cbWeekDay_CheckedChanged);
             // 
             // cbWednesday
             // 
             this.cbWednesday.AutoSize = true;
-            this.cbWednesday.Checked = true;
-            this.cbWednesday.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbWednesday.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cbWednesday.Location = new System.Drawing.Point(7, 81);
             this.cbWednesday.Name = "cbWednesday";
@@ -206,12 +205,11 @@
             this.cbWednesday.TabIndex = 2;
             this.cbWednesday.Text = "Wednesday";
             this.cbWednesday.UseVisualStyleBackColor = true;
+            this.cbWednesday.CheckedChanged += new System.EventHandler(this.cbWeekDay_CheckedChanged);
             // 
             // cbTuesday
             // 
             this.cbTuesday.AutoSize = true;
-            this.cbTuesday.Checked = true;
-            this.cbTuesday.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbTuesday.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cbTuesday.Location = new System.Drawing.Point(7, 57);
             this.cbTuesday.Name = "cbTuesday";
@@ -224,8 +222,6 @@
             // cbMonday
             // 
             this.cbMonday.AutoSize = true;
-            this.cbMonday.Checked = true;
-            this.cbMonday.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbMonday.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cbMonday.Location = new System.Drawing.Point(7, 29);
             this.cbMonday.Name = "cbMonday";
@@ -234,26 +230,6 @@
             this.cbMonday.Text = "Monday";
             this.cbMonday.UseVisualStyleBackColor = true;
             this.cbMonday.CheckedChanged += new System.EventHandler(this.cbWeekDay_CheckedChanged);
-            // 
-            // btnStart
-            // 
-            this.btnStart.Location = new System.Drawing.Point(296, 69);
-            this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(75, 23);
-            this.btnStart.TabIndex = 1;
-            this.btnStart.Text = "Stop";
-            this.btnStart.UseVisualStyleBackColor = true;
-            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(34, 94);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(50, 20);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "label4";
             // 
             // label2
             // 
@@ -292,7 +268,6 @@
             this.tfDestinationFolder.Name = "tfDestinationFolder";
             this.tfDestinationFolder.Size = new System.Drawing.Size(184, 23);
             this.tfDestinationFolder.TabIndex = 0;
-            this.tfDestinationFolder.Text = "c:/ss_default";
             this.tfDestinationFolder.Click += new System.EventHandler(this.TFDestinationFolder_Click);
             this.tfDestinationFolder.TextChanged += new System.EventHandler(this.tfDestinationFolder_TextChanged);
             // 
@@ -311,6 +286,7 @@
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.linkLabel1);
             this.panel1.Controls.Add(this.tfDestinationFolder);
             this.panel1.Controls.Add(this.nudSavePeriodicaly);
@@ -323,17 +299,55 @@
             this.panel1.Size = new System.Drawing.Size(399, 175);
             this.panel1.TabIndex = 6;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(42, 144);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(46, 16);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "label1";
+            // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.Control;
             this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.panel2.Controls.Add(this.btnStart);
-            this.panel2.Controls.Add(this.label4);
+            this.panel2.Controls.Add(this.pbSavedPicture);
+            this.panel2.Controls.Add(this.pbStatus);
+            this.panel2.Controls.Add(this.lblStatus);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 181);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(399, 143);
             this.panel2.TabIndex = 7;
+            // 
+            // pbSavedPicture
+            // 
+            this.pbSavedPicture.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pbSavedPicture.BackgroundImage")));
+            this.pbSavedPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pbSavedPicture.Location = new System.Drawing.Point(33, 51);
+            this.pbSavedPicture.Name = "pbSavedPicture";
+            this.pbSavedPicture.Size = new System.Drawing.Size(338, 76);
+            this.pbSavedPicture.TabIndex = 2;
+            this.pbSavedPicture.TabStop = false;
+            // 
+            // pbStatus
+            // 
+            this.pbStatus.Location = new System.Drawing.Point(117, 17);
+            this.pbStatus.Name = "pbStatus";
+            this.pbStatus.Size = new System.Drawing.Size(21, 20);
+            this.pbStatus.TabIndex = 1;
+            this.pbStatus.TabStop = false;
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.ForeColor = System.Drawing.Color.Transparent;
+            this.lblStatus.Location = new System.Drawing.Point(144, 21);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(98, 16);
+            this.lblStatus.TabIndex = 0;
+            this.lblStatus.Text = "working status";
             // 
             // panel3
             // 
@@ -376,6 +390,7 @@
             this.Name = "MainForm";
             this.Text = "Saving Screenshots periodically";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.Resize += new System.EventHandler(this.Form1_Resize);
             this.trayContextMenu.ResumeLayout(false);
             this.gbTime.ResumeLayout(false);
             this.gbWeek.ResumeLayout(false);
@@ -385,6 +400,8 @@
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSavedPicture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbStatus)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -410,16 +427,18 @@
         private System.Windows.Forms.ContextMenuStrip trayContextMenu;
         private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.NumericUpDown nudSavePeriodicaly;
         private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tfDestinationFolder;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.PictureBox pbStatus;
+        public System.Windows.Forms.PictureBox pbSavedPicture;
+        private System.Windows.Forms.Label label1;
     }
 }
 

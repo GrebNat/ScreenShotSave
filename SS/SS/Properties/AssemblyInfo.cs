@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("SS")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("EPAM Systems")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("SS")]
-[assembly: AssemblyCopyright("Copyright © EPAM Systems 2016")]
+[assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
