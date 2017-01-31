@@ -113,6 +113,9 @@ namespace SS
             int localSavePeriodically = Properties.Settings.Default.savePeriodical;
             string localDestinationPath = Properties.Settings.Default.destinationPath;
 
+            TimeSpan localStartDate = Properties.Settings.Default.startTime;
+            TimeSpan localEndDate = Properties.Settings.Default.endTime;
+
 
             cbMonday.CheckState = localMonday ? CheckState.Checked: CheckState.Unchecked;
             cbTuesday.CheckState = localTuesday ? CheckState.Checked : CheckState.Unchecked;
@@ -125,9 +128,9 @@ namespace SS
             
             nudSavePeriodicaly.Value = localSavePeriodically;
             tfDestinationFolder.Text = localDestinationPath;
-        //    dpStartDate. = Properties.Settings.Default.startTime;
-        //    dpEndDate.Value = Properties.Settings.Default.endTime;
-
+            DateTime today = DateTime.Now;
+            dpStartDate.Value = new DateTime(today.Year, today.Month, today.Day, localStartDate.Hours, localStartDate.Minutes, localStartDate.Seconds);
+            dpEndDate.Value = new DateTime(today.Year, today.Month, today.Day, localEndDate.Hours, localEndDate.Minutes, localEndDate.Seconds);
         }
         public void UpdateProperties()
         {
@@ -208,13 +211,13 @@ namespace SS
 
         public void setSuccessfull()
         {
-            pbStatus.Image = new Bitmap(@"D:\c#-projects\SS\green2.png");
+         //   pbStatus.Image = new Bitmap(@"D:\c#-projects\SS\green2.png");
             this.lblStatus.ForeColor = Color.Green;
         }
 
         public void setFail()
         {
-            pbStatus.Image = new Bitmap(@"D:\c#-projects\SS\red.png");
+           // pbStatus.Image = new Bitmap(@"D:\c#-projects\SS\red.png");
             lblStatus.ForeColor = Color.Red;
         }
     }

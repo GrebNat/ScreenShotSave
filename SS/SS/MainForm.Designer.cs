@@ -114,7 +114,6 @@
             this.dpStartDate.ShowUpDown = true;
             this.dpStartDate.Size = new System.Drawing.Size(82, 23);
             this.dpStartDate.TabIndex = 1;
-            this.dpStartDate.Value = new System.DateTime(2016, 12, 28, 9, 30, 0, 0);
             this.dpStartDate.ValueChanged += new System.EventHandler(this.dpStartDate_ValueChanged);
             // 
             // dpEndDate
@@ -127,7 +126,6 @@
             this.dpEndDate.ShowUpDown = true;
             this.dpEndDate.Size = new System.Drawing.Size(74, 23);
             this.dpEndDate.TabIndex = 2;
-            this.dpEndDate.Value = new System.DateTime(2016, 12, 28, 18, 30, 0, 0);
             this.dpEndDate.ValueChanged += new System.EventHandler(this.dpEndDate_ValueChanged);
             // 
             // gbWeek
